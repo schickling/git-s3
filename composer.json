@@ -5,11 +5,12 @@
 	"require": {
 		"symfony/console": "2.4.*@dev",
 		"symfony/yaml": "2.4.*@dev",
-		"aws/aws-sdk-php": "2.3.*@dev"
+		"aws/aws-sdk-php": "2.3.*@dev",
+		"gitonomy/gitlib": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
-			"": "src/"
+			"GitS3": "src/"
 		}
 	},
 	"minimum-stability": "dev"
