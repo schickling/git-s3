@@ -12,17 +12,15 @@ class Bucket
 	
 	public function __construct($key, $secret, $name)
 	{
+		$this->name = $name;
 		$this->s3 = S3Client::factory(array(
 			'key'		=> $key,
 			'secret'	=> $secret
 			));
-		$this->name = $name;
 	}
 
 	public function upload(File $file)
 	{
-		$key = $file->getRelativePathname();
-
 		$this->s3->putObject(array(
 			'Bucket' => $this->name,
 			'Key'    => $file->getRelativePathname(),

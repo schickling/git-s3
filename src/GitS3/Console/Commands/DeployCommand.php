@@ -22,7 +22,7 @@ class DeployCommand extends Command {
 		$this->output = $output;
 		$this->bucket = $application->getBucket();
 		$this->finder = new Finder();
-		$this->finder->files()->in($application->getPublicPath());
+		$this->finder->files()->in($application->getRepositoryPath());
 
 		if ($this->hasNotBeenInitialized()) {
 			$this->init();

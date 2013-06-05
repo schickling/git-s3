@@ -22,7 +22,7 @@ class Application extends BaseApplication
 		$this->bucket = new Bucket($config['key'], $config['secret'], $config['bucket']);
 
 		// load repository
-		$this->repository = new Repository(__DIR__ . '/../../../');
+		$this->repository = new Repository(__DIR__ . '/../../../repo');
 
 		// add available commands
 		$this->addCommands(array(
@@ -45,9 +45,9 @@ class Application extends BaseApplication
 		return $this->bucket;
 	}
 
-	public function getPublicPath()
+	public function getRepositoryPath()
 	{
-		return $this->repository->getPath() . '/public';
+		return $this->repository->getPath();
 	}
 
 	public function writeLastDeploy()
