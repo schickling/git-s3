@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$app = new Application('git-s3', '0.1.0');
+$app->addCommands(array(
+    new GitS3\Console\Command\DeployCommand()
+));
+$app->run();
