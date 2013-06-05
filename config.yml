@@ -1,3 +1,9 @@
-# Amazon Web Services (AWS) credentials
+### Amazon Web Services (AWS) configuration
+###########################################
+
+# key - AWS Access Key ID
 key: Your Key
+# secret - AWS secret access key
 secret: Your Secret
+# region - Region name (e.g. 'us-east-1', 'us-west-1', 'us-west-2', 'eu-west-1', etc...)
+region: eu-west-1
