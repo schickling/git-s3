@@ -5,6 +5,7 @@
 	"require": {
 		"symfony/console": "2.4.*@dev",
 		"symfony/yaml": "2.4.*@dev",
+		"symfony/finder": "2.4.*@dev",
 		"aws/aws-sdk-php": "2.3.*@dev",
 		"gitonomy/gitlib": "dev-master"
 	},

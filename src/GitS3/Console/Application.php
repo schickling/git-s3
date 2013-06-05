@@ -3,7 +3,7 @@
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Yaml\Yaml;
 use Gitonomy\Git\Repository;
-use Aws\S3\S3Client;
+use GitS3\Wrapper\Bucket;
 
 
 class Application extends BaseApplication
@@ -11,15 +11,15 @@ class Application extends BaseApplication
 
 	private $config;
 	private $repository;
-	private $s3;
+	private $bucket;
 	
 	public function __construct($name, $version)
 	{
 		parent::__construct($name, $version);
 
-		// prepare s3 client
+		// prepare bucket
 		$config = Yaml::parse(__DIR__ . '/../../../config.yml');
-		$this->s3 = S3Client::factory($config);
+		$this->bucket = new Bucket($config['key'], $config['secret'], $config['bucket']);
 
 		// load repository
 		$this->repository = new Repository(__DIR__ . '/../../../');
@@ -40,8 +40,20 @@ class Application extends BaseApplication
 		return $this->repository;
 	}
 
-	public function getS3()
+	public function getBucket()
 	{
-		return $this->s3;
+		return $this->bucket;
+	}
+
+	public function getPublicPath()
+	{
+		return $this->repository->getPath() . '/public';
+	}
+
+	public function writeLastDeploy()
+	{
+		$hash = $this->repository->run('rev-parse', array('HEAD'));
+
+		file_put_contents(__DIR__ . '/../../../last-deploy.lock', $hash);
 	}
 }
