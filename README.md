@@ -23,6 +23,8 @@ Nothing more. Cool, huh?
     * set commit
     * rollback
     * log
+* rename mechanism instead of symbolic links for seamlessly deployment (current directory)
+* TESTS!
 
 ## Contribution
 If you like this project feel free to open a pull request/issue with your idea :)
