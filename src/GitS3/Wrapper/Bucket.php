@@ -29,11 +29,11 @@ class Bucket
 			));
 	}
 
-	public function delete(File $file)
+	public function delete($fileName)
 	{
 		$this->s3->deleteObject(array(
 			'Bucket' => $this->name,
-			'Key'    => $file->getRelativePathname()
+			'Key'    => $fileName
 			));
 	}
 }

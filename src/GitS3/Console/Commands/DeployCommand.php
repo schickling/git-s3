@@ -4,6 +4,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo as File;
+use GitS3\Wrapper\Diff;
+
 
 class DeployCommand extends Command {
 
@@ -26,18 +29,25 @@ class DeployCommand extends Command {
 
 		if ($this->hasNotBeenInitialized()) {
 			$this->init();
+			$application->writeLastDeploy();
+			$output->writeln('Lock file initialized. Deployment complete!');
+		} elseif ($this->isUpToDate()) {
+			$output->writeln('Already up-to-date.');
 		} else {
 			$this->deployCurrentCommit();
+			$application->writeLastDeploy();
+			$output->writeln('Lock file updated. Deployment complete!');
 		}
+	}
 
-		$application->writeLastDeploy();
-		$output->writeln('Lock file updated. Deployment complete!');
-
+	private function isUpToDate()
+	{
+		return $this->getApplication()->getIsUpToDate();
 	}
 
 	private function hasNotBeenInitialized()
 	{
-		return $this->getApplication()->getLastDeploy() == '';
+		return $this->getApplication()->getHashOfLastDeploy() == '';
 	}
 
 	private function init()
@@ -49,27 +59,32 @@ class DeployCommand extends Command {
 
 	private function deployCurrentCommit()
 	{
-		$addedSinceLastDeploy = array();
-		$deletedSinceLastDeploy = array();
+		$application = $this->getApplication();
+		$diff = new Diff($application->getRepository(), $application->getHashOfLastDeploy());
+
+		$filesToUpload = $diff->getFilesToUpload();
+		$filesToDelete = $diff->getFilesToDelete();
 
 		foreach ($this->finder as $file) {
-			if (in_array($file->getRelativePathname(), $addedSinceLastDeploy)) {
+			if (in_array($file->getRelativePathname(), $filesToUpload)) {
 				$this->uploadFile($file);
-			} elseif (in_array($file->getRelativePathname(), $deletedSinceLastDeploy)) {
-				$this->deleteFile($file);
 			}
+		}
+
+		foreach ($filesToDelete as $fileName) {
+			$this->deleteFile($fileName);
 		}
 	}
 
-	private function uploadFile($file)
+	private function uploadFile(File $file)
 	{
 		$this->output->writeln('Uploading ' . $file->getRelativePathname());
 		$this->bucket->upload($file);
 	}
 
-	private function deleteFile($file)
+	private function deleteFile($fileName)
 	{
-		$this->output->writeln('Deleting ' . $file->getRelativePathname());
-		$this->bucket->delete($file);
+		$this->output->writeln('Deleting ' . $fileName);
+		$this->bucket->delete($fileName);
 	}
 }

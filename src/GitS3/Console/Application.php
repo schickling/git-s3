@@ -9,9 +9,8 @@ use GitS3\Wrapper\Bucket;
 class Application extends BaseApplication
 {
 
-	private $config;
-	private $repository;
 	private $bucket;
+	private $repository;
 	
 	public function __construct($name, $version)
 	{
@@ -30,9 +29,9 @@ class Application extends BaseApplication
 			));
 	}
 
-	public function getLastDeploy()
+	public function getHashOfLastDeploy()
 	{
-		return file_get_contents(__DIR__ . '/../../../last-deploy.lock');
+		return trim(file_get_contents(__DIR__ . '/../../../last-deploy.lock'));
 	}
 
 	public function getRepository()
@@ -52,8 +51,16 @@ class Application extends BaseApplication
 
 	public function writeLastDeploy()
 	{
-		$hash = $this->repository->run('rev-parse', array('HEAD'));
+		file_put_contents(__DIR__ . '/../../../last-deploy.lock', $this->getCurrentHash());
+	}
 
-		file_put_contents(__DIR__ . '/../../../last-deploy.lock', $hash);
+	public function getCurrentHash()
+	{
+		return trim($this->repository->run('rev-parse', array('HEAD')));
+	}
+
+	public function getIsUpToDate()
+	{
+		return $this->getHashOfLastDeploy() == $this->getCurrentHash();
 	}
 }
