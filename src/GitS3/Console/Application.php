@@ -2,7 +2,7 @@
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Yaml\Yaml;
-use Gitonomy\Git\Repository;
+use GitWrapper\GitWrapper;
 use GitS3\Wrapper\Bucket;
 
 
@@ -21,7 +21,8 @@ class Application extends BaseApplication
 		$this->bucket = new Bucket($config['key'], $config['secret'], $config['bucket']);
 
 		// load repository
-		$this->repository = new Repository(__DIR__ . '/../../../repo');
+		$wrapper = new GitWrapper();
+		$this->repository = $wrapper->workingCopy($this->getRepositoryPath());
 
 		// add available commands
 		$this->addCommands(array(
@@ -46,7 +47,7 @@ class Application extends BaseApplication
 
 	public function getRepositoryPath()
 	{
-		return $this->repository->getPath();
+		return __DIR__ . '/../../../repo';
 	}
 
 	public function writeLastDeploy()
@@ -56,7 +57,7 @@ class Application extends BaseApplication
 
 	public function getCurrentHash()
 	{
-		return trim($this->repository->run('rev-parse', array('HEAD')));
+		return $this->repository->log('-1', array('pretty' => 'format:%H'))->getOutput();
 	}
 
 	public function getIsUpToDate()
