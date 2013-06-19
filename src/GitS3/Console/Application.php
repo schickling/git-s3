@@ -17,7 +17,7 @@ class Application extends BaseApplication
 		parent::__construct($name, $version);
 
 		// prepare bucket
-		$config = Yaml::parse(__DIR__ . '/../../../config.yml');
+		$config = $this->getConfig();
 		$this->bucket = new Bucket($config['key'], $config['secret'], $config['bucket']);
 
 		// load repository
@@ -26,7 +26,8 @@ class Application extends BaseApplication
 
 		// add available commands
 		$this->addCommands(array(
-			new Commands\DeployCommand()
+			new Commands\ConfigCommand(),
+			new Commands\DeployCommand(),
 			));
 	}
 
@@ -43,6 +44,17 @@ class Application extends BaseApplication
 	public function getBucket()
 	{
 		return $this->bucket;
+	}
+
+	public function getConfig()
+	{
+		return Yaml::parse(__DIR__ . '/../../../config.yml');
+	}
+
+	public function setConfig(array $config)
+	{
+		$yaml = Yaml::dump($config);
+		file_put_contents(__DIR__ . '/../../../config.yml', $yaml);
 	}
 
 	public function getRepositoryPath()
