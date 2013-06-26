@@ -1,6 +1,6 @@
-git-s3
-======
-Easy way to deploy your git repo to a AWS S3 bucket.
+![image](http://d1zjcuqflbd5k.cloudfront.net/files/acc_145548/cOgG?response-content-disposition=inline;%20filename=Gits3.jpg;%20filename*=UTF-8%27%27Gits3.jpg&Expires=1372283448&Signature=BVnKVhosgbRYaHKZEPdu~RqA7IaBP4UnjlWbAfgxUci4obCtLR4Ky3skz1c-qls492OaOTvlsGDTa2hfdiri86iNNP9rmCxN9jZ7bjbfkZpJ3e0TLjbb~rpQ-eueDMAcBAwegMc8FlSS4Dxq9WYpw8v6i8M6TCJhmUj2~PtpGBs_&Key-Pair-Id=APKAJTEIOJM3LSMN33SA)
+
+An easy way to deploy your git repo to a AWS S3 bucket.
 
 
 ## Installation
