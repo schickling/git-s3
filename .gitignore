@@ -1,4 +1,6 @@
 .DS_Store
+composer.phar
 composer.lock
+config.yml
 /vendor
 /repo
