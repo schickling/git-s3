@@ -4,9 +4,12 @@ Easy way to deploy your git repo to a AWS S3 bucket.
 
 
 ## Installation
-Just clone this repository `git clone https://github.com/schickling/git-s3.git` and run the installation script `./install.sh`
+Just clone this repository `git clone https://github.com/schickling/git-s3.git`  
+and run the installation script `./install.sh`
 
 ## Usage
+
+After the installation your repository is already checked out in the "repo" folder. There you can do whatever you like and commit your changes. After that you can deploy your current commit.
 
 #### Deploy
 Simply run `./git-s3 deploy`
