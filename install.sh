@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# halt on error
+set -e
+
 # install composer dependencies
 echo "Installing dependencies..."
 

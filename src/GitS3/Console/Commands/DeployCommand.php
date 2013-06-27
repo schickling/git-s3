@@ -35,8 +35,8 @@ class DeployCommand extends Command {
 			$output->writeln('Already up-to-date.');
 		} else {
 			$this->deployCurrentCommit();
-			// $application->writeLastDeploy();
-			// $output->writeln('Lock file updated. Deployment complete!');
+			$application->writeLastDeploy();
+			$output->writeln('Lock file updated. Deployment complete!');
 		}
 	}
 

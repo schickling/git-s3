@@ -3,7 +3,7 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use Symfony\Component\Filesystem\Filesystem;
 
 class ConfigCommand extends Command
 {
@@ -32,25 +32,43 @@ class ConfigCommand extends Command
 	{
 		$this->askAndSet('Enter your AWS access key ID: ', 'key', 'key');
 		$this->askAndSet('Enter your AWS secret access key: ', 'secret', 'secret');
-		$this->askAndSet('Enter your Region name (default: eu-west-1): ', 'region', 'eu-west-1');
+		$this->askAndSet('Enter your Region name (default: eu-west-1): ', 'eu-west-1', 'region');
 		$this->askAndSet('Enter your bucket title: ', 'bucket', 'bucket');
 	}
 
 	private function configureRepo()
 	{
-		// TODO
+		$application = $this->getApplication();
+		$repository = $application->getRepository();
+
+		$repoName = $this->ask('Please enter your repo (SSH/HTTPS/local): ', '');
+
+		// reset repo folder
+		$repoFolder = $application->getRepositoryPath();
+		$fs = new Filesystem();
+		$fs->remove($repoFolder);
+		$fs->mkdir($repoFolder);
+
+		$repository->clone($repoName);
 	}
 
-	private function askAndSet($question, $configKey, $default)
+	private function askAndSet($question, $defaultValue, $configKey)
 	{
 		$application = $this->getApplication();
-		$dialog = $application->getHelperSet()->get('dialog');
 		$config = $application->getConfig();
 
-		$value = $dialog->ask($this->output, $question, $default);
+		$value = $this->ask($question, $defaultValue);
 		$config[$configKey] = $value;
 
 		$application->setConfig($config);
+	}
+
+	private function ask($question, $defaultValue)
+	{
+		$application = $this->getApplication();
+		$dialog = $application->getHelperSet()->get('dialog');
+
+		return $dialog->ask($this->output, $question, $defaultValue);
 	}
 	
 }
