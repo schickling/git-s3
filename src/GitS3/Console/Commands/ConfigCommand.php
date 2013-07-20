@@ -23,7 +23,9 @@ class ConfigCommand extends Command
 		$this->output = $output;
 
 		$this->configureAWS();
+		$this->configurePath();
 		$this->configureRepo();
+		$this->saveConfig();
 
 		$this->output->writeln('Configuration was successful.');
 	}
@@ -36,31 +38,46 @@ class ConfigCommand extends Command
 		$this->askAndSet('Enter your bucket title: ', 'bucket', 'bucket');
 	}
 
+	private function configurePath()
+	{
+		$this->askAndSet('Enter the path (relative or absolute) where your repo lives: ', '', 'path');
+	}
+
 	private function configureRepo()
 	{
+		if (strtolower($this->ask('Do you want to clone your repo? (default: "n"): ', 'n')) == 'y')
+		{
+			$application = $this->getApplication();
+			$config = $application->getConfig();
+			$repository = $application->getRepository();
+
+			$repoName = $this->ask('Please enter your repo (SSH/HTTPS/local): ', '');
+
+			// reset repo folder
+			$repoFolder = $config->getPath();
+			$fs = new Filesystem();
+			$fs->remove($repoFolder);
+			$fs->mkdir($repoFolder);
+
+			$repository->clone($repoName);
+		}		
+	}
+
+	private function saveConfig()
+	{
 		$application = $this->getApplication();
-		$repository = $application->getRepository();
-
-		$repoName = $this->ask('Please enter your repo (SSH/HTTPS/local): ', '');
-
-		// reset repo folder
-		$repoFolder = $application->getConfig()->getPath();
-		$fs = new Filesystem();
-		$fs->remove($repoFolder);
-		$fs->mkdir($repoFolder);
-
-		$repository->clone($repoName);
+		$config = $application->getConfig();
+		$config->save();
 	}
 
 	private function askAndSet($question, $defaultValue, $configKey)
 	{
 		$application = $this->getApplication();
 		$config = $application->getConfig();
-
 		$value = $this->ask($question, $defaultValue);
-		$config[$configKey] = $value;
+		$setter = 'set' . ucfirst($configKey);
 
-		$application->setConfig($config);
+		$config->$setter($value);
 	}
 
 	private function ask($question, $defaultValue)
