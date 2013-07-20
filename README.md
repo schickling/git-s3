@@ -1,9 +1,9 @@
 ![image](http://i.imagebanana.com/img/sgfs0rmr/Gits3.jpg)
 
-An easy way to deploy your git repo to a AWS S3 bucket. [![Build Status](https://travis-ci.org/schickling/git-s3.png)](https://travis-ci.org/schickling/git-s3)
+An easy way to deploy your git repo to a AWS S3 bucket.
 
 
-## Installation
+## Installation [![Build Status](https://travis-ci.org/schickling/git-s3.png)](https://travis-ci.org/schickling/git-s3)
 Just clone this repository `git clone https://github.com/schickling/git-s3.git && cd git-s3`  
 and run the installation script `./install.sh`
 
@@ -24,8 +24,8 @@ Either run `bin/git-s3 config` or edit the `config.yml` file manually
 * No extra files in your S3 bucket
 
 ## Comming soon
-* Commit rollback
 * Deploy history
+* Full composer installation support
 * ...
 
 ## Support & Contribution

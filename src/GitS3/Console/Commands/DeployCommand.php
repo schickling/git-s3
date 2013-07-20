@@ -7,33 +7,38 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo as File;
 use GitS3\Wrapper\Diff;
 
-
-class DeployCommand extends Command {
-
+class DeployCommand extends Command
+{
 	private $output;
 	private $finder;
 
-	protected function configure() {
+	protected function configure()
+	{
 		$this->setName('deploy');
 		$this->setDescription('Deploy the current git repo');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
-
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
 		$application = $this->getApplication();
 
 		$this->output = $output;
 		$this->bucket = $application->getBucket();
 		$this->finder = new Finder();
-		$this->finder->files()->in($application->getRepositoryPath());
+		$this->finder->files()->in($application->getConfig()->getPath());
 
-		if ($this->hasNotBeenInitialized()) {
+		if ($this->hasNotBeenInitialized())
+		{
 			$this->init();
 			$application->writeLastDeploy();
 			$output->writeln('Lock file initialized. Deployment complete!');
-		} elseif ($this->isUpToDate()) {
+		}
+		elseif ($this->isUpToDate())
+		{
 			$output->writeln('Already up-to-date.');
-		} else {
+		}
+		else
+		{
 			$this->deployCurrentCommit();
 			$application->writeLastDeploy();
 			$output->writeln('Lock file updated. Deployment complete!');
@@ -52,7 +57,8 @@ class DeployCommand extends Command {
 
 	private function init()
 	{
-		foreach ($this->finder as $file) {
+		foreach ($this->finder as $file)
+		{
 			$this->uploadFile($file);
 		}
 	}
@@ -65,13 +71,16 @@ class DeployCommand extends Command {
 		$filesToUpload = $diff->getFilesToUpload();
 		$filesToDelete = $diff->getFilesToDelete();
 
-		foreach ($this->finder as $file) {
-			if (in_array($file->getRelativePathname(), $filesToUpload)) {
+		foreach ($this->finder as $file)
+		{
+			if (in_array($file->getRelativePathname(), $filesToUpload))
+			{
 				$this->uploadFile($file);
 			}
 		}
 
-		foreach ($filesToDelete as $fileName) {
+		foreach ($filesToDelete as $fileName)
+		{
 			$this->deleteFile($fileName);
 		}
 	}

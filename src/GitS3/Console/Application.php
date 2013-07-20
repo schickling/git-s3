@@ -1,39 +1,45 @@
 <?php namespace GitS3\Console;
 
 use Symfony\Component\Console\Application as BaseApplication;
-use Symfony\Component\Yaml\Yaml;
 use GitWrapper\GitWrapper;
 use GitS3\Wrapper\Bucket;
-
+use GitS3\Wrapper\Config;
 
 class Application extends BaseApplication
 {
 
+	private $config;
 	private $bucket;
 	private $repository;
 	
-	public function __construct($name, $version)
+	public function __construct(Config $config)
 	{
-		parent::__construct($name, $version);
+		parent::__construct('git-s3', '0.1.0');
 
-		// prepare bucket
-		$config = $this->getConfig();
-		$this->bucket = new Bucket($config['key'], $config['secret'], $config['bucket']);
+		$this->config = $config;
 
-		// load repository
+		$this->initBucket();
+		$this->initRepository();
+		$this->initCommands();
+	}
+
+	private function initBucket()
+	{
+		$this->bucket = new Bucket($this->config->getKey(), $this->config->getSecret(), $this->config->getBucket());
+	}
+
+	private function initRepository()
+	{
 		$wrapper = new GitWrapper();
-		$this->repository = $wrapper->workingCopy($this->getRepositoryPath());
+		$this->repository = $wrapper->workingCopy($this->config->getPath());
+	}
 
-		// add available commands
+	private function initCommands()
+	{
 		$this->addCommands(array(
 			new Commands\ConfigCommand(),
 			new Commands\DeployCommand(),
 			));
-	}
-
-	public function getHashOfLastDeploy()
-	{
-		return trim(file_get_contents(__DIR__ . '/../../../last-deploy.lock'));
 	}
 
 	public function getRepository()
@@ -48,18 +54,12 @@ class Application extends BaseApplication
 
 	public function getConfig()
 	{
-		return Yaml::parse(__DIR__ . '/../../../config.yml');
+		return $this->config;
 	}
 
-	public function setConfig(array $config)
+	public function getHashOfLastDeploy()
 	{
-		$yaml = Yaml::dump($config);
-		file_put_contents(__DIR__ . '/../../../config.yml', $yaml);
-	}
-
-	public function getRepositoryPath()
-	{
-		return __DIR__ . '/../../../repo';
+		return trim(file_get_contents(__DIR__ . '/../../../last-deploy.lock'));
 	}
 
 	public function writeLastDeploy()

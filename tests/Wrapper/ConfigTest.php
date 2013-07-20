@@ -63,7 +63,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
 	public function testSetPath()
 	{
-		$this->config->setPath('src');
+		$this->config->setPath('./src');
 	}
 
 	public function testSetAndSave()
@@ -72,7 +72,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 		$this->config->setSecret('ChangedSecret');
 		$this->config->setRegion('ChangedRegion');
 		$this->config->setBucket('ChangedBucket');
-		$this->config->setPath('src/bin');
+		$this->config->setPath('./bin');
 
 		$this->assertTrue($this->config->save() != false);
 

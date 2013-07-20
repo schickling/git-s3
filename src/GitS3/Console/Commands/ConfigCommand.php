@@ -44,7 +44,7 @@ class ConfigCommand extends Command
 		$repoName = $this->ask('Please enter your repo (SSH/HTTPS/local): ', '');
 
 		// reset repo folder
-		$repoFolder = $application->getRepositoryPath();
+		$repoFolder = $application->getConfig()->getPath();
 		$fs = new Filesystem();
 		$fs->remove($repoFolder);
 		$fs->mkdir($repoFolder);

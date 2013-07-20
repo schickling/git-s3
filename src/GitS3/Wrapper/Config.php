@@ -52,7 +52,6 @@ class Config
 
 		if ( ! realpath($path))
 		{
-			var_dump($path);
 			throw new Exception('Invalid path');
 		}
 

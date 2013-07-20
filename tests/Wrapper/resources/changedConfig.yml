@@ -2,4 +2,4 @@ key: ChangedKey
 secret: ChangedSecret
 region: ChangedRegion
 bucket: ChangedBucket
-path: ./src/bin
+path: ./bin
