@@ -4,10 +4,12 @@
 // unset time limit since the commands may take a while
 set_time_limit(0);
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 
-use GitS3\Console\Application;
+// load config
+$config = new GitS3\Wrapper\Config(__DIR__ . '/../config.yml');
 
-$app = new Application('git-s3', '0.1.0');
+// start application
+$app = new GitS3\Console\Application($config);
 $app->run();

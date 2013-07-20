@@ -1,0 +1,4 @@
+*
+!.gitignore
+!config.yml
+!changedConfig.yml
