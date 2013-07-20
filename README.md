@@ -1,6 +1,6 @@
 ![image](http://i.imagebanana.com/img/sgfs0rmr/Gits3.jpg)
 
-An easy way to deploy your git repo to a AWS S3 bucket.
+An easy way to deploy your git repo to a AWS S3 bucket. [![Build Status](https://travis-ci.org/schickling/git-s3.png)](https://travis-ci.org/schickling/git-s3)
 
 
 ## Installation
