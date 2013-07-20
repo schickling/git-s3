@@ -10,6 +10,9 @@
 		"aws/aws-sdk-php": "2.3.*@dev",
 		"cpliakas/git-wrapper": "dev-master"
 	},
+    "require-dev": {
+        "mockery/mockery": "dev-master"
+    },
 	"autoload": {
 		"psr-0": {
 			"GitS3": "src/"

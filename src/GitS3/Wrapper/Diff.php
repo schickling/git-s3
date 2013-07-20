@@ -9,8 +9,8 @@ class Diff
 	
 	public function __construct(Repository $repository, $hashToCompare)
 	{
-		$output = $repository->diff($hashToCompare, array('name-status' => true))->getOutput();
-		$this->processOutput($output);
+		$repository->diff($hashToCompare, array('name-status' => true));
+		$this->processOutput($repository->getOutput());
 	}
 
 	public function getFilesToUpload()
