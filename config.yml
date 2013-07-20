@@ -9,3 +9,10 @@ secret: YourSecret
 region: eu-west-1
 # bucket title
 bucket: YourBucket
+
+
+### Repository configuration ##############
+###########################################
+
+# relative or absolute path to your repository
+path: ../repo
