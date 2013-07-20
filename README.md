@@ -12,10 +12,10 @@ and run the installation script `./install.sh`
 After the installation your repository is already checked out in the "repo" folder. There you can do whatever you like and commit your changes. After that you can deploy your current commit.
 
 #### Deploy
-Simply run `./git-s3 deploy`
+Simply run `bin/git-s3 deploy`
 
 #### Configure
-Either run `./git-s3 config` or edit the `config.yml` file manually
+Either run `bin/git-s3 config` or edit the `config.yml` file manually
 
 ## Features
 * Super easy installation and usage
