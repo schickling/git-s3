@@ -14,6 +14,7 @@ else
 fi
 
 # run configuration
+cd bin
 php git-s3 config
 
 # finish
