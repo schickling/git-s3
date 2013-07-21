@@ -20,4 +20,4 @@ php git-s3 config
 # finish
 echo ""
 echo "Good job."
-echo "Installation/Update was successful. Now type \"./git-s3 deploy\" to deploy your repository to your s3 bucket."
+echo "Installation/Update was successful. Now type \"bin/git-s3 deploy\" to deploy your repository to your s3 bucket."
