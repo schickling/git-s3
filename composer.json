@@ -7,7 +7,7 @@
 		"symfony/yaml": "2.4.*@dev",
 		"symfony/finder": "2.4.*@dev",
 		"symfony/filesystem": "2.4.*@dev",
-		"aws/aws-sdk-php": "2.3.*@dev",
+		"aws/aws-sdk-php": "2.4.*@dev",
 		"cpliakas/git-wrapper": "dev-master"
 	},
     "require-dev": {

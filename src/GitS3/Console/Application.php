@@ -59,11 +59,13 @@ class Application extends BaseApplication
 
 	public function getHashOfLastDeploy()
 	{
+		$this->checkLastDeployLockFile();
 		return trim(file_get_contents(__DIR__ . '/../../../last-deploy.lock'));
 	}
 
 	public function writeLastDeploy()
 	{
+		$this->checkLastDeployLockFile();
 		file_put_contents(__DIR__ . '/../../../last-deploy.lock', $this->getCurrentHash());
 	}
 
@@ -75,5 +77,13 @@ class Application extends BaseApplication
 	public function getIsUpToDate()
 	{
 		return $this->getHashOfLastDeploy() == $this->getCurrentHash();
+	}
+
+	private function checkLastDeployLockFile()
+	{
+		if ( ! is_file(__DIR__ . '/../../../last-deploy.lock'))
+		{
+			touch(__DIR__ . '/../../../last-deploy.lock');
+		}
 	}
 }
