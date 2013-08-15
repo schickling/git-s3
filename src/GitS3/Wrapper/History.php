@@ -34,7 +34,18 @@ class History
 
 	private function load()
 	{
+		if ( ! is_file($this->filePath))
+		{
+			touch($this->filePath);
+		}
+
 		$data = file_get_contents($this->filePath);
-		$this->hashes = explode("\n", $data);
+		$lines = explode("\n", $data);
+
+		foreach ($lines as $line) {
+			if (preg_match('/[a-f0-9]{40}/', $line)) {
+				$this->addHash($line);
+			}
+		}
 	}
 }
