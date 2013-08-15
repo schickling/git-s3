@@ -2,3 +2,4 @@
 !.gitignore
 !config.yml
 !changedConfig.yml
+!readHistory.lock
