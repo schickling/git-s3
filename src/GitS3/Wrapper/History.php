@@ -11,12 +11,17 @@ class History
 		$this->load();
 	}
 
+	public function isEmpty()
+	{
+		return count($this->hashes) === 0;
+	}
+
 	public function getHashes()
 	{
 		return $this->hashes;
 	}
 
-	public function getCurrentHash()
+	public function getLastHash()
 	{
 		return $this->hashes[count($this->hashes) - 1];
 	}

@@ -23,7 +23,9 @@ class ConfigCommandTest extends PHPUnit_Framework_TestCase
         $configMock->shouldReceive('setBucket')->once();
         $configMock->shouldReceive('save')->once();
 
-		$application = new Application($configMock);
+        $historyMock = m::mock('GitS3\Wrapper\History');
+
+		$application = new Application($configMock, $historyMock);
 
         $dialog = m::mock('Symfony\Component\Console\Helper\DialogHelper')->makePartial();
         $dialog->shouldReceive('ask');

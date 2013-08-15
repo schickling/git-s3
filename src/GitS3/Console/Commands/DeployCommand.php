@@ -30,29 +30,24 @@ class DeployCommand extends Command
 		if ($this->hasNotBeenInitialized())
 		{
 			$this->init();
-			$application->writeLastDeploy();
+			$application->saveLastDeploy();
 			$output->writeln('Lock file initialized. Deployment complete!');
 		}
-		elseif ($this->isUpToDate())
+		elseif ($application->isUpToDate())
 		{
 			$output->writeln('Already up-to-date.');
 		}
 		else
 		{
 			$this->deployCurrentCommit();
-			$application->writeLastDeploy();
+			$application->saveLastDeploy();
 			$output->writeln('Lock file updated. Deployment complete!');
 		}
 	}
 
-	private function isUpToDate()
-	{
-		return $this->getApplication()->getIsUpToDate();
-	}
-
 	private function hasNotBeenInitialized()
 	{
-		return $this->getApplication()->getHashOfLastDeploy() == '';
+		return $this->getApplication()->getHistory()->isEmpty();
 	}
 
 	private function init()
@@ -66,7 +61,8 @@ class DeployCommand extends Command
 	private function deployCurrentCommit()
 	{
 		$application = $this->getApplication();
-		$diff = new Diff($application->getRepository(), $application->getHashOfLastDeploy());
+		$history = $application->getHistory();
+		$diff = new Diff($application->getRepository(), $history->getLastHash());
 
 		$filesToUpload = $diff->getFilesToUpload();
 		$filesToDelete = $diff->getFilesToDelete();

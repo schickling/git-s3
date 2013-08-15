@@ -4,6 +4,7 @@ use Symfony\Component\Console\Application as BaseApplication;
 use GitWrapper\GitWrapper;
 use GitS3\Wrapper\Bucket;
 use GitS3\Wrapper\Config;
+use GitS3\Wrapper\History;
 
 class Application extends BaseApplication
 {
@@ -11,12 +12,14 @@ class Application extends BaseApplication
 	private $config;
 	private $bucket;
 	private $repository;
+	private $history;
 	
-	public function __construct(Config $config)
+	public function __construct(Config $config, History $history)
 	{
 		parent::__construct('git-s3', '0.1.0');
 
 		$this->config = $config;
+		$this->history = $history;
 
 		$this->initBucket();
 		$this->initRepository();
@@ -30,8 +33,8 @@ class Application extends BaseApplication
 
 	private function initRepository()
 	{
-		$wrapper = new GitWrapper();
-		$this->repository = $wrapper->workingCopy($this->config->getPath());
+		$gitWrapper = new GitWrapper();
+		$this->repository = $gitWrapper->workingCopy($this->config->getPath());
 	}
 
 	private function initCommands()
@@ -52,38 +55,31 @@ class Application extends BaseApplication
 		return $this->bucket;
 	}
 
+	public function getHistory()
+	{
+		return $this->history;
+	}
+
 	public function getConfig()
 	{
 		return $this->config;
 	}
 
-	public function getHashOfLastDeploy()
+	public function isUpToDate()
 	{
-		$this->checkLastDeployLockFile();
-		return trim(file_get_contents(__DIR__ . '/../../../last-deploy.lock'));
+		return $this->history->getLastHash() == $this->getCurrentHash();
 	}
 
-	public function writeLastDeploy()
+	public function saveLastDeploy()
 	{
-		$this->checkLastDeployLockFile();
-		file_put_contents(__DIR__ . '/../../../last-deploy.lock', $this->getCurrentHash());
+		$lastDeploy = $this->getCurrentHash();
+
+		$this->history->addHash($lastDeploy);
+		$this->history->save();
 	}
 
-	public function getCurrentHash()
+	private function getCurrentHash()
 	{
 		return $this->repository->log('-1', array('pretty' => 'format:%H'))->getOutput();
-	}
-
-	public function getIsUpToDate()
-	{
-		return $this->getHashOfLastDeploy() == $this->getCurrentHash();
-	}
-
-	private function checkLastDeployLockFile()
-	{
-		if ( ! is_file(__DIR__ . '/../../../last-deploy.lock'))
-		{
-			touch(__DIR__ . '/../../../last-deploy.lock');
-		}
 	}
 }

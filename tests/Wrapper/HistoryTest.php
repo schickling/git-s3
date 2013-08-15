@@ -21,7 +21,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
 			);
 
 		$this->assertEquals($expectedHashes, $history->getHashes());
-		$this->assertEquals('20d4531193c0d78222152911ad932dc5a6caf324', $history->getCurrentHash());
+		$this->assertEquals('20d4531193c0d78222152911ad932dc5a6caf324', $history->getLastHash());
 	}
 
 	public function testCreateHistoryFile()
@@ -30,6 +30,20 @@ class HistoryTest extends PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_file(__DIR__ . '/resources/testHistory.lock'));
 		$this->assertEquals(array(), $history->getHashes());
+	}
+
+	public function testIsEmptyPositive()
+	{
+		$history = new History(__DIR__ . '/resources/testHistory.lock');
+		
+		$this->assertTrue($history->isEmpty());
+	}
+
+	public function testIsEmptyNegative()
+	{
+		$history = new History(__DIR__ . '/resources/readHistory.lock');
+		
+		$this->assertFalse($history->isEmpty());
 	}
 
 	public function testAddHash()
@@ -44,7 +58,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
 			);
 
 		$this->assertEquals($expectedHashes, $history->getHashes());
-		$this->assertEquals('20d4531193c0d78222152911ad932dc5a6caf321', $history->getCurrentHash());
+		$this->assertEquals('20d4531193c0d78222152911ad932dc5a6caf321', $history->getLastHash());
 	}
 
 	public function testHashesGetSaved()
@@ -55,7 +69,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
 		
 		$history = new History(__DIR__ . '/resources/testHistory.lock');
 		$this->assertEquals(array('20d4531193c0d78222152911ad932dc5a6caf320'), $history->getHashes());
-		$this->assertEquals('20d4531193c0d78222152911ad932dc5a6caf320', $history->getCurrentHash());
+		$this->assertEquals('20d4531193c0d78222152911ad932dc5a6caf320', $history->getLastHash());
 	}
 
 	private function deleteTestHistory()
