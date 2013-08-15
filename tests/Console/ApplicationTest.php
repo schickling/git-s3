@@ -50,7 +50,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
 	public function testIsUpToDatePositive()
 	{
-		$this->historyMock->shouldReceive('getLastHash')->andReturn('843d77526c91e1ed7ab7236568d797a0a267eb40');
+		$this->historyMock->shouldReceive('getLastHash')->andReturn('e53f405732f27aeeaa04ac07a542372d6f4b1a88');
 		$this->assertTrue($this->application->isUpToDate());
 	}
 
