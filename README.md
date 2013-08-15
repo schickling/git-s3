@@ -22,10 +22,11 @@ Either run `bin/git-s3 config` or edit the `config.yml` file manually
 * Uploads or deletes just the files, which have changed in your repository
 * Works with any git repository (even local repositories)
 * No extra files in your S3 bucket
+* Deploy history
 
 ## Comming soon
-* Deploy history
-* Full composer installation support
+* composer global installation
+* Command to see deploy history
 * ...
 
 ## Support & Contribution
