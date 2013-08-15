@@ -1,0 +1,3 @@
+[submodule "tests/Console/resources/testRepo"]
+	path = tests/Console/resources/testRepo
+	url = https://github.com/rmccue/test-repository.git
