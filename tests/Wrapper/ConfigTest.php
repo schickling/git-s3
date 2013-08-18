@@ -15,6 +15,13 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 		$this->config = new Config($copiedConfigFile);
 	}
 
+	public function testCopyConfigFileOnInit()
+	{
+		$config = new Config(__DIR__ . '/resources/initConfig.yml');
+		
+		$this->assertTrue(is_file(__DIR__ . '/resources/initConfig.yml'));
+	}
+
 	public function testGetKey()
 	{
 		$this->assertEquals('YourKey', $this->config->getKey());

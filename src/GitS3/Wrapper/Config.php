@@ -99,10 +99,10 @@ class Config
 	{
 		if ( ! is_file($this->filePath))
 		{
-			copy(__DIR__ . '../../../config.yml', $this->filePath);
+			copy(__DIR__ . '../../../../config.yml', $this->filePath);
 		}
 
-		$this->data = Yaml::parse($filePath);
+		$this->data = Yaml::parse($this->filePath);
 	}
 	
 }
