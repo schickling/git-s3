@@ -47,7 +47,7 @@ class Config
 		}
 		else
 		{
-			$path = __DIR__ . '/../../../' . $pathValue;
+			$path = getcwd() . '/' . $pathValue;
 		}
 
 		if ( ! realpath($path))
