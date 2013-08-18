@@ -14,7 +14,7 @@
 		"symfony/finder": "2.4.*",
 		"symfony/filesystem": "2.4.*",
 		"aws/aws-sdk-php": "2.4.*",
-		"cpliakas/git-wrapper": "dev-master"
+		"cpliakas/git-wrapper": "1.0.*"
 	},
     "require-dev": {
         "mockery/mockery": "dev-master",
