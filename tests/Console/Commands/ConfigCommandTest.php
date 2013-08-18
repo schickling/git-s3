@@ -12,10 +12,6 @@ class ConfigCommandTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
 		$configMock = m::mock('GitS3\Wrapper\Config');
-		$configMock->shouldReceive('getKey')->once()->andReturn('something');
-		$configMock->shouldReceive('getSecret')->once()->andReturn('something');
-		$configMock->shouldReceive('getBucket')->once()->andReturn('something');
-        $configMock->shouldReceive('getPath')->once()->andReturn('something');
         $configMock->shouldReceive('setKey')->once();
 		$configMock->shouldReceive('setSecret')->once();
         $configMock->shouldReceive('setPath')->once();

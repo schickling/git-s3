@@ -21,24 +21,6 @@ class Application extends BaseApplication
 		$this->config = $config;
 		$this->history = $history;
 
-		$this->initBucket();
-		$this->initRepository();
-		$this->initCommands();
-	}
-
-	private function initBucket()
-	{
-		$this->bucket = new Bucket($this->config->getKey(), $this->config->getSecret(), $this->config->getBucket());
-	}
-
-	private function initRepository()
-	{
-		$gitWrapper = new GitWrapper();
-		$this->repository = $gitWrapper->workingCopy($this->config->getPath());
-	}
-
-	private function initCommands()
-	{
 		$this->addCommands(array(
 			new Commands\ConfigCommand(),
 			new Commands\DeployCommand(),
@@ -47,11 +29,23 @@ class Application extends BaseApplication
 
 	public function getRepository()
 	{
+		// lazy initialize
+		if ( ! $this->repository)
+		{
+			$this->initRepository();
+		}
+
 		return $this->repository;
 	}
 
 	public function getBucket()
 	{
+		// lazy initialize
+		if ( ! $this->bucket)
+		{
+			$this->initBucket();
+		}
+
 		return $this->bucket;
 	}
 
@@ -80,6 +74,17 @@ class Application extends BaseApplication
 
 	private function getCurrentHash()
 	{
-		return $this->repository->log('-1', array('pretty' => 'format:%H'))->getOutput();
+		return $this->getRepository()->log('-1', array('pretty' => 'format:%H'))->getOutput();
+	}
+
+	private function initBucket()
+	{
+		$this->bucket = new Bucket($this->config->getKey(), $this->config->getSecret(), $this->config->getBucket());
+	}
+
+	private function initRepository()
+	{
+		$gitWrapper = new GitWrapper();
+		$this->repository = $gitWrapper->workingCopy($this->config->getPath());
 	}
 }
