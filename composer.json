@@ -9,16 +9,16 @@
         }
     ],
 	"require": {
-		"symfony/console": "2.4.*@dev",
-		"symfony/yaml": "2.4.*@dev",
-		"symfony/finder": "2.4.*@dev",
-		"symfony/filesystem": "2.4.*@dev",
-		"aws/aws-sdk-php": "2.4.*@dev",
+		"symfony/console": "2.4.*",
+		"symfony/yaml": "2.4.*",
+		"symfony/finder": "2.4.*",
+		"symfony/filesystem": "2.4.*",
+		"aws/aws-sdk-php": "2.4.*",
 		"cpliakas/git-wrapper": "dev-master"
 	},
     "require-dev": {
         "mockery/mockery": "dev-master",
-        "satooshi/php-coveralls": "~0.6"
+        "satooshi/php-coveralls": "~0.6.*"
     },
     "bin": [
         "bin/git-s3"
