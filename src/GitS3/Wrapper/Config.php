@@ -16,44 +16,12 @@ class Config
 
 	public function getPath()
 	{
-		$pathValue = $this->data['path'];
-
-		// check if path is absolute
-		if (substr($pathValue, 0, 1) == '/')
-		{
-			$path = $pathValue;
-		}
-		else
-		{
-			$path = __DIR__ . '/../../../' . $pathValue;
-		}
-
-		$path = realpath($path);
-
-		if ( ! $path)
-		{
-			throw new Exception('Invalid path');
-		}
-
-		return $path;
+		return $this->checkPathValueAndGetRealPath($this->data['path']);
 	}
 
 	public function setPath($pathValue)
 	{
-		// check if path is absolute
-		if (substr($pathValue, 0, 1) == '/')
-		{
-			$path = $pathValue;
-		}
-		else
-		{
-			$path = getcwd() . '/' . $pathValue;
-		}
-
-		if ( ! realpath($path))
-		{
-			throw new Exception('Invalid path');
-		}
+		$this->checkPathValueAndGetRealPath($pathValue);
 
 		$this->data['path'] = $pathValue;
 	}
@@ -103,6 +71,28 @@ class Config
 		}
 
 		$this->data = Yaml::parse($this->filePath);
+	}
+
+	private function checkPathValueAndGetRealPath($pathValue)
+	{
+		// check if path is absolute
+		if (substr($pathValue, 0, 1) == '/')
+		{
+			$path = $pathValue;
+		}
+		else
+		{
+			$path = getcwd() . '/' . $pathValue;
+		}
+
+		$realpath = realpath($path);
+
+		if ( ! realpath($path))
+		{
+			throw new Exception('Invalid path');
+		}
+
+		return $realpath;
 	}
 	
 }
