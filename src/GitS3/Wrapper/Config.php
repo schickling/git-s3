@@ -87,7 +87,7 @@ class Config
 
 		$realpath = realpath($path);
 
-		if ( ! realpath($path))
+		if ( ! $realpath)
 		{
 			throw new Exception('Invalid path');
 		}

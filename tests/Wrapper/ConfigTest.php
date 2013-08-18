@@ -48,6 +48,19 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expectedPath, $this->config->getPath());
 	}
 
+	public function testGetAbsolutePath($value='')
+	{
+		$absolutePath = realpath(__DIR__ . '/../../src');
+		$this->config->setPath($absolutePath);
+		$this->assertEquals($absolutePath, $this->config->getPath());
+	}
+
+	public function testInvalidPath()
+	{
+		$this->setExpectedException('Exception');
+		$this->config->setPath('justWrong');
+	}
+
 	public function testSetKey()
 	{
 		$this->config->setKey('something');
