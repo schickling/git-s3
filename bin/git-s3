@@ -4,7 +4,7 @@
 // unset time limit since the commands may take a while
 set_time_limit(0);
 
-require __DIR__ . '/../../../../autoload.php';
+require __DIR__ . '/../../../autoload.php';
 
 // prepared dependencies
 $currentDir = getcwd();
