@@ -23,9 +23,6 @@
     "bin": [
         "bin/git-s3"
     ],
-    "config": {
-        "bin-dir": "bin"
-    },
 	"autoload": {
 		"psr-0": {
 			"GitS3": "src/"
