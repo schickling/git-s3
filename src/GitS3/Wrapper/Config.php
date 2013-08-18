@@ -6,12 +6,12 @@ use Exception;
 
 class Config
 {
-	private $file;
+	private $filePath;
 	private $data;
 
-	public function __construct($file) {
-		$this->file = $file;
-		$this->data = Yaml::parse($file);
+	public function __construct($filePath) {
+		$this->filePath = $filePath;
+		$this->load();
 	}
 
 	public function getPath()
@@ -92,7 +92,17 @@ class Config
 	{
 		$yaml = Yaml::dump($this->data);
 
-		return file_put_contents($this->file, $yaml);
+		return file_put_contents($this->filePath, $yaml);
+	}
+
+	private function load()
+	{
+		if ( ! is_file($this->filePath))
+		{
+			copy(__DIR__ . '../../../config.yml', $this->filePath);
+		}
+
+		$this->data = Yaml::parse($filePath);
 	}
 	
 }
