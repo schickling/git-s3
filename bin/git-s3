@@ -4,11 +4,12 @@
 // unset time limit since the commands may take a while
 set_time_limit(0);
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../../../autoload.php';
 
-// dependencies
-$config = new GitS3\Wrapper\Config(__DIR__ . '/../config.yml');
-$history = new GitS3\Wrapper\History(__DIR__ . '/../history.lock');
+// prepared dependencies
+$currentDir = getcwd();
+$config = new GitS3\Wrapper\Config($currentDir . '/config.yml');
+$history = new GitS3\Wrapper\History($currentDir . '/history.lock');
 
 // start application
 $app = new GitS3\Console\Application($config, $history);
