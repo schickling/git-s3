@@ -3,19 +3,24 @@
 An easy way to deploy your git repo to an AWS S3 bucket.
 
 ## Installation [![Build Status](https://travis-ci.org/schickling/git-s3.png)](https://travis-ci.org/schickling/git-s3) [![Coverage Status](https://coveralls.io/repos/schickling/git-s3/badge.png?branch=master)](https://coveralls.io/r/schickling/git-s3?branch=master)
-A [global installation of Composer](https://github.com/schickling/git-s3/blob/master/docs/COMPOSER.md) is needed. git-s3 is also installed globally.
+A [global installation of Composer](https://github.com/schickling/git-s3/blob/master/doc/COMPOSER.md) is needed. __git-s3 is installed globally.__
 ```sh
 $ composer global require schickling/git-s3:dev-master
 ```
 
 ## Usage
-After the installation your repository is already checked out in the "repo" folder. There you can do whatever you like and commit your changes. Now you can deploy your current commit.
+After the installation run `git-s3 config` to initialize the app.  All needed files (config, history) will be created in the current directory. That's it. [A full example can be found here.](https://github.com/schickling/git-s3/blob/master/doc/EXAMPLE.md)
 
-#### Configure
-Either run `$ git-s3 config` or edit the `config.yml` file manually
+#### Configure / Initialize
+Edit the `config.yml` file manually or run
+```sh
+$ git-s3 config
+```
 
 #### Deploy
-Simply run `$ git-s3 deploy`
+```sh
+$ git-s3 deploy
+```
 
 ## Features
 * Super easy installation and usage
@@ -24,7 +29,6 @@ Simply run `$ git-s3 deploy`
 * Deploy history
 
 ## Comming soon
-* composer global installation
 * Command to see deploy history
 * Brew support
 * subfolder as repo
