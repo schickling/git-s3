@@ -33,6 +33,7 @@ $ git-s3 deploy
 * Brew support
 * subfolder as repo
 * higher test coverage
+* upload progress bar
 * ...
 
 ## Support & Contribution
