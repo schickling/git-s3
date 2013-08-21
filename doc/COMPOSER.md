@@ -18,3 +18,26 @@ PATH=$HOME/.composer/vendor/bin:$PATH
 ```sh
 $ composer global require schickling/git-s3:dev-master
 ```
+
+## Troubleshooting
+
+### minimum-stability
+
+![](http://i.imgur.com/YmEzFfQ.png)
+
+#### Solution
+```sh
+$ cd
+$ vim .composer/composer.json
+```
+
+And add the following line a the bottom (don't forget the comma on the line before):
+
+```json
+	"minimum-stability": "dev"
+```
+
+After that your file looks perhaps like this:
+```json
+
+```
