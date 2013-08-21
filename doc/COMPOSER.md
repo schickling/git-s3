@@ -27,17 +27,16 @@ $ composer global require schickling/git-s3:dev-master
 
 #### Solution
 ```sh
-$ cd
-$ vim .composer/composer.json
+$ vim ~/.composer/composer.json
 ```
 
-And add the following line at the bottom (don't forget the comma on the line before):
+And add the following line at the bottom (don't forget the comma on the line before). If the file is empty just copy the `composer.json` from below:
 
 ```json
 	"minimum-stability": "dev"
 ```
 
-After that your file looks perhaps like this:
+After that your `composer.json` looks perhaps like this:
 ```json
 {
     "require": {
