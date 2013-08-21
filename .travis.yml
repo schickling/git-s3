@@ -6,8 +6,8 @@ php:
   - 5.5
 
 before_script:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev
+  - composer selfupdate
+  - composer install --dev
 
 script: phpunit --coverage-text --coverage-clover ./build/logs/clover.xml
 
