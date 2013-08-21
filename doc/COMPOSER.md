@@ -39,5 +39,10 @@ And add the following line a the bottom (don't forget the comma on the line befo
 
 After that your file looks perhaps like this:
 ```json
-
+{
+    "require": {
+        "schickling/git-s3": "dev-master"
+    },
+	"minimum-stability": "dev"
+}
 ```
