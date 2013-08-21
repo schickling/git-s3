@@ -10,7 +10,7 @@ $ mv composer.phar /usr/local/bin/composer
 ```
 
 ### Add to `$PATH`
-Add the following add the end to your bash/zsh file (e.g. `.bashrc`, `.bash_profile`, ...)
+Add the following at the end to your bash/zsh file (e.g. `.bashrc`, `.bash_profile`, ...)
 ```sh
 PATH=$HOME/.composer/vendor/bin:$PATH
 ```
