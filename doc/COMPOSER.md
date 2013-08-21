@@ -31,7 +31,7 @@ $ cd
 $ vim .composer/composer.json
 ```
 
-And add the following line a the bottom (don't forget the comma on the line before):
+And add the following line at the bottom (don't forget the comma on the line before):
 
 ```json
 	"minimum-stability": "dev"
