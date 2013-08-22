@@ -1,7 +1,7 @@
 ![image](http://i.imagebanana.com/img/sgfs0rmr/Gits3.jpg)
 
 #### The problem
-* You have a S3 bucket and want a git repository for all your data in it
+* You have an __AWS S3 bucket__ and want a __git repository__ for all your data in it
 * You don't want to upload or delete all changed files manually
 
 #### With `git-s3`
