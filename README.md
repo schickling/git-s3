@@ -41,3 +41,7 @@ $ git-s3 deploy
 
 ## Support & Contribution
 If you have an issue or an idea how to improve this project please open an Issue/Pull Request [here](https://github.com/schickling/git-s3/issues)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/schickling/git-s3/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
