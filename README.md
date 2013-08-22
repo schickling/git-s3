@@ -1,6 +1,8 @@
 ![image](http://i.imagebanana.com/img/sgfs0rmr/Gits3.jpg)
 
-An easy way to deploy your git repo to an AWS S3 bucket.
+You have a S3 bucket and want a git repository for all your data in it. But you don't want to upload or delete all changed files manually.
+__git-s3__ automates this deployment process for you.
+
 
 ## Installation [![Build Status](https://travis-ci.org/schickling/git-s3.png)](https://travis-ci.org/schickling/git-s3) [![Coverage Status](https://coveralls.io/repos/schickling/git-s3/badge.png?branch=master)](https://coveralls.io/r/schickling/git-s3?branch=master)
 A [global installation of Composer](https://github.com/schickling/git-s3/blob/master/doc/COMPOSER.md) is needed. __git-s3 is installed globally.__
