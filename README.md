@@ -1,7 +1,13 @@
 ![image](http://i.imagebanana.com/img/sgfs0rmr/Gits3.jpg)
 
-You have a S3 bucket and want a git repository for all your data in it. But you don't want to upload or delete all changed files manually.
-__git-s3__ automates this deployment process for you.
+#### The problem
+* You have a S3 bucket and want a git repository for all your data in it
+* You don't want to upload or delete all changed files manually
+
+#### With `git-s3`
+* __Automated deployment process__
+* Super __easy__ installation and usage
+* Uploads or deletes just the files, which have changed
 
 
 ## Installation [![Build Status](https://travis-ci.org/schickling/git-s3.png)](https://travis-ci.org/schickling/git-s3) [![Coverage Status](https://coveralls.io/repos/schickling/git-s3/badge.png?branch=master)](https://coveralls.io/r/schickling/git-s3?branch=master)
@@ -23,12 +29,6 @@ $ git-s3 config
 ```sh
 $ git-s3 deploy
 ```
-
-## Features
-* Super easy installation and usage
-* Uploads or deletes just the files, which have changed
-* No extra files in your S3 bucket
-* Deploy history
 
 ## Coming soon
 * Command to see deploy history
