@@ -6,6 +6,7 @@
 
 #### With `git-s3`
 * __Automated deployment process__
+* __versioning__ and revision control for S3
 * Super __easy__ installation and usage
 * Uploads or deletes just the files, which have changed
 
