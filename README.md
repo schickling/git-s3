@@ -28,7 +28,7 @@ $ git-s3 deploy
 * No extra files in your S3 bucket
 * Deploy history
 
-## Comming soon
+## Coming soon
 * Command to see deploy history
 * Brew support
 * subfolder as repo
