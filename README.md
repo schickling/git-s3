@@ -37,6 +37,7 @@ $ git-s3 deploy
 * subfolder as repo
 * higher test coverage
 * upload progress bar
+* use git-s3 as non-global package
 * ...
 
 ## Support & Contribution
