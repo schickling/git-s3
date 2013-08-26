@@ -10,10 +10,10 @@ class DiffTest extends PHPUnit_Framework_TestCase
 		$output = "A\tnewFile";
 		
 		$repository = m::mock('GitWrapper\GitWorkingCopy');
-		$repository->shouldReceive('diff');
-		$repository->shouldReceive('getOutput')
-				   ->once()
-				   ->andReturn($output);
+		$repository->shouldReceive('diff')->once();
+		$repository->shouldReceive('getDirectory')->once()->andReturn('');
+		$repository->shouldReceive('run')->once()->andReturn($repository);
+		$repository->shouldReceive('getOutput')->once()->andReturn($output);
 
 		$diff = new Diff($repository, 'someHash');
 
@@ -31,10 +31,11 @@ class DiffTest extends PHPUnit_Framework_TestCase
 		$output = "D\tdeletedFile";
 		
 		$repository = m::mock('GitWrapper\GitWorkingCopy');
-		$repository->shouldReceive('diff');
-		$repository->shouldReceive('getOutput')
-				   ->once()
-				   ->andReturn($output);
+		
+		$repository->shouldReceive('diff')->once();
+		$repository->shouldReceive('getDirectory')->once()->andReturn('');
+		$repository->shouldReceive('run')->once()->andReturn($repository);
+		$repository->shouldReceive('getOutput')->once()->andReturn($output);
 
 		$diff = new Diff($repository, 'someHash');
 
@@ -52,10 +53,11 @@ class DiffTest extends PHPUnit_Framework_TestCase
 		$output = "M\tmodfiedFile";
 		
 		$repository = m::mock('GitWrapper\GitWorkingCopy');
-		$repository->shouldReceive('diff');
-		$repository->shouldReceive('getOutput')
-				   ->once()
-				   ->andReturn($output);
+		
+		$repository->shouldReceive('diff')->once();
+		$repository->shouldReceive('getDirectory')->once()->andReturn('');
+		$repository->shouldReceive('run')->once()->andReturn($repository);
+		$repository->shouldReceive('getOutput')->once()->andReturn($output);
 
 		$diff = new Diff($repository, 'someHash');
 
@@ -73,10 +75,11 @@ class DiffTest extends PHPUnit_Framework_TestCase
 		$output = "A\tnewFile\nA\tanotherNewFile\nA\tyetAnotherNewFile";
 		
 		$repository = m::mock('GitWrapper\GitWorkingCopy');
-		$repository->shouldReceive('diff');
-		$repository->shouldReceive('getOutput')
-				   ->once()
-				   ->andReturn($output);
+		
+		$repository->shouldReceive('diff')->once();
+		$repository->shouldReceive('getDirectory')->once()->andReturn('');
+		$repository->shouldReceive('run')->once()->andReturn($repository);
+		$repository->shouldReceive('getOutput')->once()->andReturn($output);
 
 		$diff = new Diff($repository, 'someHash');
 
