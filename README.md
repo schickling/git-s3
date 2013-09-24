@@ -38,6 +38,7 @@ $ git-s3 deploy
 * higher test coverage
 * upload progress bar
 * use git-s3 as non-global package
+* __Ruby rewrite__
 * ...
 
 ## Support & Contribution
