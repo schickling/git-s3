@@ -46,3 +46,36 @@ After that your `composer.json` looks perhaps like this:
 	"minimum-stability": "dev"
 }
 ```
+
+## Installation on Windows
+
+
+### Install php (if it's not installed already)
+
+I recommend using [Chocolatey] (http://chocolatey.org/packages?q=php):
+```sh
+$ cinst php
+```
+
+Close your cmd window, then open a command window. type:
+```sh
+$ php
+```
+
+to make sure you can access the php command
+
+### Download composer
+```sh
+$ curl -sS https://getcomposer.org/installer | php
+```
+
+## Install git-s3
+```sh
+$ php composer.phar composer global require schickling/git-s3:dev-master
+```
+
+## Add git-s3 to PATH
+modify your environment PATH when git-s3 was installed -- for example, mine was installed under <user_directory>\AppData\Roaming\Composer\vendor\bin
+
+## git-s3 is now ready for use
+go ahead and configure [git-s3] (https://github.com/schickling/git-s3)
