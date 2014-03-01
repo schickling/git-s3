@@ -1,4 +1,5 @@
-![image](http://i.imagebanana.com/img/sgfs0rmr/Gits3.jpg)
+git-s3
+======
 
 #### The problem
 * You have an __AWS S3 bucket__ and want a __git repository__ for all your data in it
