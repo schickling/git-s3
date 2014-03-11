@@ -71,7 +71,7 @@ $ curl -sS https://getcomposer.org/installer | php
 
 ## Install git-s3
 ```sh
-$ php composer.phar composer global require schickling/git-s3:dev-master
+$ php composer.phar global require schickling/git-s3:dev-master
 ```
 
 ## Add git-s3 to PATH
