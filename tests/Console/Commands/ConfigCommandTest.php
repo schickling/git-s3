@@ -23,7 +23,7 @@ class ConfigCommandTest extends PHPUnit_Framework_TestCase
 
 		$application = new Application($configMock, $historyMock);
 
-        $dialog = m::mock('Symfony\Component\Console\Helper\DialogHelper')->makePartial();
+        $dialog = m::mock('Symfony\Component\Console\Helper\QuestionHelper')->makePartial();
         $dialog->shouldReceive('ask');
 
         $command = new ConfigCommand();
