@@ -3,9 +3,9 @@
 use Aws\S3\S3Client;
 use Aws\S3\Enum\CannedAcl;
 use Symfony\Component\Finder\SplFileInfo as File;
-use Aws\Common\Exception\InstanceProfileCredentialsException;
 use Aws\S3\Exception\InvalidAccessKeyIdException;
-use \Exception;
+use Aws\Common\Exception\InstanceProfileCredentialsException;
+
 class Bucket
 {
 
@@ -41,7 +41,7 @@ class Bucket
 				'ACL'   		=> CannedAcl::PUBLIC_READ,
 				));
 		}
-		catch(Exception $e)
+		catch(InstanceProfileCredentialsException $e)
 		{
 			throw new InvalidAccessKeyIdException("The AWS Access Key Id you provided does not exist in our records.");
 		}
