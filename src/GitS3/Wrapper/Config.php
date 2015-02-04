@@ -70,7 +70,7 @@ class Config
 			copy(__DIR__ . '../../../../config.yml', $this->filePath);
 		}
 
-		$this->data = Yaml::parse(get_file_contents($this->filePath));
+		$this->data = Yaml::parse(file_get_contents($this->filePath));
 	}
 
 	private function checkPathValueAndGetRealPath($pathValue)
