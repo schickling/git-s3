@@ -4,6 +4,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Console\Question\Question;
 
 class ConfigCommand extends Command
 {
@@ -45,13 +46,15 @@ class ConfigCommand extends Command
 
 	private function configureRepo()
 	{
-		if (strtolower($this->ask('Do you want to clone your repo? (default: "n"): ', 'n')) == 'y')
+		$question = new Question('Do you want to clone your repo? (default: "n"): ', 'n');
+		if (strtolower($this->ask($question, 'n') == 'y'))
 		{
 			$application = $this->getApplication();
 			$config = $application->getConfig();
 			$repository = $application->getRepository();
-
-			$repoName = $this->ask('Please enter your repo (SSH/HTTPS/local): ', '');
+		
+			$repoQuestion = new Question('Please enter your repo (SSH/HTTPS/local): ', '');
+			$repoName = $this->ask($repoQuestion, '');
 
 			// reset repo folder
 			$repoFolder = $config->getPath();
@@ -70,22 +73,23 @@ class ConfigCommand extends Command
 		$config->save();
 	}
 
-	private function askAndSet($question, $defaultValue, $configKey)
+	private function askAndSet($questionString, $defaultValue, $configKey)
 	{
 		$application = $this->getApplication();
 		$config = $application->getConfig();
-		$value = $this->ask($question, $defaultValue);
-		$setter = 'set' . ucfirst($configKey);
+		$askQuestion = new Question($questionString, $defaultValue);
 
+		$value = $this->ask($askQuestion, $defaultValue);
+
+		$setter = 'set' . ucfirst($configKey);
 		$config->$setter($value);
 	}
 
-	private function ask($question, $defaultValue)
+	private function ask($askQuestion, $defaultValue)
 	{
 		$application = $this->getApplication();
-		$dialog = $application->getHelperSet()->get('dialog');
-
-		return $dialog->ask($this->output, $question, $defaultValue);
+		$question = $application->getHelperSet()->get('question');
+		return $question->ask($this->input, $this->output, $askQuestion);
 	}
 	
 }
