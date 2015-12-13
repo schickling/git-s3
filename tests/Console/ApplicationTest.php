@@ -45,6 +45,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 		$this->configMock->shouldReceive('getKey')->once();
 		$this->configMock->shouldReceive('getSecret')->once();
 		$this->configMock->shouldReceive('getBucket')->once();
+		$this->configMock->shouldReceive('getRegion')->once();
 
 		$this->assertInstanceOf('GitS3\Wrapper\Bucket', $this->application->getBucket());
 	}

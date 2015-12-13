@@ -79,7 +79,7 @@ class Application extends BaseApplication
 
 	private function initBucket()
 	{
-		$this->bucket = new Bucket($this->config->getKey(), $this->config->getSecret(), $this->config->getBucket());
+		$this->bucket = new Bucket($this->config->getKey(), $this->config->getSecret(), $this->config->getBucket(), $this->config->getRegion());
 	}
 
 	private function initRepository()

@@ -12,7 +12,7 @@ class Bucket
 	private $client;
 	private $name;
 	
-	public function __construct($key, $secret, $name)
+	public function __construct($key, $secret, $name, $region = 'eu-west-1')
 	{
 		$this->name = $name;
 		
@@ -22,11 +22,14 @@ class Bucket
 
 		//If keys are not valid, try a role.
 		if(!$validKey || !$validSecret)
-			$this->client = S3Client::factory(array());
+			$this->client = S3Client::factory(array(
+				'region' => $region,
+			));
 		else
 			$this->client = S3Client::factory(array(
-				'key'		=> $key,
-				'secret'	=> $secret,
+				'key'    => $key,
+				'secret' => $secret,
+				'region' => $region,
 			));
 	}
 
