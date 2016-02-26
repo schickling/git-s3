@@ -83,6 +83,7 @@ class DeployCommand extends Command
 
 	private function uploadFile(File $file)
 	{
+		if($file->getFilename() == 'config.yml') { return; }
 		$this->output->writeln('Uploading ' . $file->getRelativePathname());
 		$this->bucket->upload($file);
 	}
