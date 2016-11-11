@@ -64,4 +64,9 @@ class Bucket
 			throw new InvalidAccessKeyIdException("The AWS Access Key Id you provided does not exist in our records.");
 		}
 	}
+
+	public function setClient($client)
+	{
+		$this->client = $client
+	}
 }
