@@ -11,9 +11,9 @@ class ConfigCommandTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-		$configMock = m::mock('GitS3\Wrapper\Config');
+        $configMock = m::mock('GitS3\Wrapper\Config');
         $configMock->shouldReceive('setKey')->once();
-		$configMock->shouldReceive('setSecret')->once();
+        $configMock->shouldReceive('setSecret')->once();
         $configMock->shouldReceive('setPath')->once();
         $configMock->shouldReceive('setRegion')->once();
         $configMock->shouldReceive('setBucket')->once();
@@ -21,7 +21,7 @@ class ConfigCommandTest extends PHPUnit_Framework_TestCase
 
         $historyMock = m::mock('GitS3\Wrapper\History');
 
-		$application = new Application($configMock, $historyMock);
+        $application = new Application($configMock, $historyMock);
 
         $dialog = m::mock('Symfony\Component\Console\Helper\QuestionHelper')->makePartial();
         $dialog->shouldReceive('ask');
@@ -38,11 +38,11 @@ class ConfigCommandTest extends PHPUnit_Framework_TestCase
         m::close();
     }
 
-	public function testCommand()
-	{
+    public function testCommand()
+    {
         // TODO make more interactive
         $this->tester->execute(array('command' => 'config'));
 
         $this->assertRegExp("/^Configuration was successful.$/", $this->tester->getDisplay());
-	}
+    }
 }

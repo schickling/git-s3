@@ -55,8 +55,8 @@ class Bucket
 		try
 		{
 			$this->client->deleteObject(array(
-				'Bucket' => $this->name,
-				'Key'    => $fileName,
+				'Bucket'	=> $this->name,
+				'Key'		=> $fileName,
 				));
 		}
 		catch(InstanceProfileCredentialsException $e)
