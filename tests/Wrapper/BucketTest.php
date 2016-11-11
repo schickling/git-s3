@@ -9,7 +9,7 @@ use Aws\S3\Exception\AccessDeniedException;
 use Aws\Common\Exception\InstanceProfileCredentialsException;
 use Symfony\Component\Finder\SplFileInfo as File;
 
-use Mockery;
+use Mockery as m;
 
 class BucketTest extends PHPUnit_Framework_TestCase
 {
@@ -25,13 +25,13 @@ class BucketTest extends PHPUnit_Framework_TestCase
            
         $this->bucket = new Bucket($this->config->getKey(), $this->config->getSecret(), $this->config->getBucket(), $this->config->getRegion());
         $this->file = new File('something', 'something', 'something');
-        $this->s3Mock = Mockery::mock('Aws\S3\S3Client');
+        $this->s3Mock = m::mock('Aws\S3\S3Client');
         $this->bucket->setClient($this->s3Mock);
     }
 
     public function tearDown()
     {
-        Mockery::close();
+        m::close();
     }
     
     public function testUpload()
