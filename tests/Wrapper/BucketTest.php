@@ -48,11 +48,11 @@ class BucketTest extends PHPUnit_Framework_TestCase
     public function testDelete()
     {
         $this->s3Mock->shouldReceive('deleteObject')->once()->andThrow(new InstanceProfileCredentialsException);
-        $this->setExpectedException(InvalidAccessKeyIdException::class, "The AWS Access Key Id you provided does not exist in our records.");
+        $this->setExpectedException('Aws\S3\Exception\InvalidAccessKeyIdException', "The AWS Access Key Id you provided does not exist in our records.");
         $this->bucket->delete('some/mock/path.sh');
 
         $this->s3Mock->shouldReceive('deleteObject')->once()->andThrow(new Aws\S3\Exception\AccessDeniedException);
-        $this->setExpectedException(AccessDeniedException::class);
+        $this->setExpectedException('Aws\S3\Exception\AccessDeniedException');
         $this->bucket->upload($this->file);
     }
 }
