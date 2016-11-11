@@ -39,9 +39,9 @@ class Bucket
 		{
 			$this->client->putObject(array(
 				'Bucket'		=> $this->name,
-				'Key'    		=> $file->getRelativePathname(),
-				'SourceFile' 	=> $file->getRealpath(),
-				'ACL'   		=> CannedAcl::PUBLIC_READ,
+				'Key'			=> $file->getRelativePathname(),
+				'SourceFile'		=> $file->getRealpath(),
+				'ACL'			=> CannedAcl::PUBLIC_READ,
 				));
 		}
 		catch(InstanceProfileCredentialsException $e)
@@ -59,7 +59,7 @@ class Bucket
 				'Key'    => $fileName,
 				));
 		}
-		catch(Exception $e)
+		catch(InstanceProfileCredentialsException $e)
 		{
 			throw new InvalidAccessKeyIdException("The AWS Access Key Id you provided does not exist in our records.");
 		}
