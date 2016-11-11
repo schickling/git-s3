@@ -26,7 +26,7 @@ class DeployCommand extends Command
 		$this->bucket = $application->getBucket();
 		$this->finder = new Finder();
 		$this->finder->ignoreDotFiles(false);
-               $this->finder->ignoreVCS(true);
+		$this->finder->ignoreVCS(true);
 		$this->finder->files()->in($application->getConfig()->getPath());
 
 		if ($this->hasNotBeenInitialized())

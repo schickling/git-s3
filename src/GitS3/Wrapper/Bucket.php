@@ -39,9 +39,9 @@ class Bucket
 		{
 			$this->client->putObject(array(
 				'Bucket'		=> $this->name,
-				'Key'    		=> $file->getRelativePathname(),
-				'SourceFile' 	=> $file->getRealpath(),
-				'ACL'   		=> CannedAcl::PUBLIC_READ,
+				'Key'			=> $file->getRelativePathname(),
+				'SourceFile'		=> $file->getRealpath(),
+				'ACL'			=> CannedAcl::PUBLIC_READ,
 				));
 		}
 		catch(InstanceProfileCredentialsException $e)
@@ -55,13 +55,18 @@ class Bucket
 		try
 		{
 			$this->client->deleteObject(array(
-				'Bucket' => $this->name,
-				'Key'    => $fileName,
+				'Bucket'	=> $this->name,
+				'Key'		=> $fileName,
 				));
 		}
-		catch(Exception $e)
+		catch(InstanceProfileCredentialsException $e)
 		{
 			throw new InvalidAccessKeyIdException("The AWS Access Key Id you provided does not exist in our records.");
 		}
+	}
+
+	public function setClient($client)
+	{
+		$this->client = $client;
 	}
 }
