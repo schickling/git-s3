@@ -37,11 +37,11 @@ class BucketTest extends PHPUnit_Framework_TestCase
     public function testUpload()
     {
         $this->s3Mock->shouldReceive('putObject')->once()->andThrow(new InstanceProfileCredentialsException);
-        $this->setExpectedException(InvalidAccessKeyIdException::class, "The AWS Access Key Id you provided does not exist in our records.");
+        $this->setExpectedException('Aws\S3\Exception\InvalidAccessKeyIdException', "The AWS Access Key Id you provided does not exist in our records.");
         $this->bucket->upload($this->file);
 
         $this->s3Mock->shouldReceive('putObject')->once()->andThrow(new Aws\S3\Exception\AccessDeniedException);
-        $this->setExpectedException(AccessDeniedException::class);
+        $this->setExpectedException('Aws\S3\Exception\AccessDeniedException');
         $this->bucket->upload($this->file);
     }
 
